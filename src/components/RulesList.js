@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 import { COLORS } from '../constants/colors'
@@ -6,6 +6,8 @@ import { StateContext } from '../App'
 
 import { Title3 } from './Title'
 import CheckIcon from './CheckIcon'
+import { hasBunAround } from '../modules/checker'
+
 
 const Container = styled.div`
   display: flex;
@@ -38,14 +40,17 @@ const OnTableBlock = styled.div`
 `
 
 const RulesList = () => {
-  const { userBurger } = useContext(StateContext)
+  const { userBurger } = useContext(StateContext);
+  // const [hasBunAround, setHasBunAround] = useState(false);
+
+  let isValid = hasBunAround(userBurger);
 
   return (
     <Container>
       <Title3>Golden rules of a burger</Title3>
       <List>
         <ListItem>
-          <CheckIcon checked={false} />
+          <CheckIcon checked={isValid} />
           Bun on top and bottom
         </ListItem>
         <ListItem>
